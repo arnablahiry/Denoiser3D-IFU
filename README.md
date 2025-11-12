@@ -47,7 +47,7 @@ $$
 $$
 where $\Phi^{T}$ represents a 2D isotropic Starlet transform applied spatially and a 1D biorthogonal B-spline transform applied spectrally.
 
-![Wavelet Decomposition](figures/coeffs_reshaped.svg)
+![Wavelet Decomposition](figures/wavelets/coeffs_reshaped.svg)
 
 The denoising minimizes:
 
@@ -79,6 +79,8 @@ The U-Net consists of:
 - LeakyReLU activations  
 - Transposed convolutions for upsampling
 
+![U-Net Architecture](figures/U-Net/unet.svg)
+
 The network is optimized using the Adam optimizer with learning rate $10^{-4}$ and mean squared error (MSE) loss:
 
 $$\mathcal{L} = \frac{1}{N} \sum_i (X_i^{\text{true}} - X_i^{\text{pred}})^2.$$
@@ -103,6 +105,8 @@ The intrinsic 3D light distribution follows:
 $$S(x, y, z) = S_e \exp\!\left[-b_n \left(\frac{\sqrt{x^2 + y^2}}{R_e}\right)^{1/n} + 1\right]\exp\!\left(-\frac{|z|}{h_z}\right),$$
 
 and is expressed in units of Jy beam⁻¹ after convolution with a Gaussian beam and addition of spatially correlated noise.
+
+![Toy Cube Parameter Space](figures/toy_cubes/toy_visualise.svg)
 
 These synthetic cubes form the core training and benchmarking dataset for both the unsupervised and supervised denoising pipelines.
 
