@@ -52,18 +52,17 @@ $$
 where $\Phi^{T}$ represents a 2D isotropic Starlet transform applied spatially and a 1D biorthogonal B-spline transform applied spectrally.
 
 The denoising minimizes:
-$$
-J(X) = \|Y - X\|^2 + \lambda \|\Phi^T X\|_p, \quad p \in \{0, 1\},
-$$
+
+$$J(X) = \|Y - X\|^2 + \lambda \|\Phi^T X\|_p, \quad p \in \{0, 1\},$$
+
 where $p = 1$ corresponds to soft thresholding. Thresholds are derived from the median absolute deviation (MAD) of the wavelet coefficients:
-$$
-\sigma_\alpha = \frac{\text{median}(|\alpha - \text{median}(\alpha)|)}{0.6745}.
-$$
+
+$$\sigma_\alpha = \frac{\text{median}(|\alpha - \text{median}(\alpha)|)}{0.6745}.$$
 
 Reweighted soft thresholding iteratively refines the wavelet coefficients to correct the bias of the ℓ₁ penalty:
-$$
-W_i^{(n)} = \frac{\lambda \sigma_\alpha^{(n-1)}}{|\alpha_i^{(n-1)}| + \epsilon}.
-$$
+
+$$W_i^{(n)} = \frac{\lambda \sigma_\alpha^{(n-1)}}{|\alpha_i^{(n-1)}| + \epsilon}.$$
+
 Residual signal extraction is performed on the remaining flux, ensuring convergence when the residual variance plateaus.
 
 The method conserves integrated flux while adaptively suppressing noise at multiple spatial and spectral scales.
@@ -83,9 +82,9 @@ The U-Net consists of:
 - Transposed convolutions for upsampling
 
 The network is optimized using the Adam optimizer with learning rate $10^{-4}$ and mean squared error (MSE) loss:
-$$
-\mathcal{L} = \frac{1}{N} \sum_i (X_i^{\text{true}} - X_i^{\text{pred}})^2.
-$$
+
+$$\mathcal{L} = \frac{1}{N} \sum_i (X_i^{\text{true}} - X_i^{\text{pred}})^2.$$
+
 Training data are partitioned into 80 % training, 10 % validation, and 10 % testing sets.  
 The resulting weights and training logs are stored in the `weights` directory.
 
@@ -102,10 +101,9 @@ Each cube represents a system of rotating disk galaxies defined by parameters su
 - Peak SNR between 2.5 and 8
 
 The intrinsic 3D light distribution follows:
-$$
-S(x, y, z) = S_e \exp\!\left[-b_n \left(\frac{\sqrt{x^2 + y^2}}{R_e}\right)^{1/n} + 1\right]
-\exp\!\left(-\frac{|z|}{h_z}\right),
-$$
+
+$$S(x, y, z) = S_e \exp\!\left[-b_n \left(\frac{\sqrt{x^2 + y^2}}{R_e}\right)^{1/n} + 1\right]\exp\!\left(-\frac{|z|}{h_z}\right),$$
+
 and is expressed in units of Jy beam⁻¹ after convolution with a Gaussian beam and addition of spatially correlated noise.
 
 These synthetic cubes form the core training and benchmarking dataset for both the unsupervised and supervised denoising pipelines.
@@ -117,15 +115,11 @@ These synthetic cubes form the core training and benchmarking dataset for both t
 The repository includes implementations of flux- and error-based evaluation metrics used across all analyses.
 
 1. **Flux Conservation**
-   $$
-   S = \sum_{(i,j,k)\in A} X_{i,j,k}
-   $$
+   $$S = \sum_{(i,j,k)\in A} X_{i,j,k}$$
    where $A$ is the emission aperture.
 
 2. **Root Mean Squared Error (RMSE)**
-   $$
-   \text{RMSE} = \sqrt{\frac{1}{N_p} \sum_{A} (X^{\text{den}} - X^{\text{true}})^2}
-   $$
+   $$\text{RMSE} = \sqrt{\frac{1}{N_p} \sum_{A} (X^{\text{den}} - X^{\text{true}})^2}$$
 
 3. **Residual Standard Deviation and SNR Gain**  
    Quantify the magnitude of remaining noise and signal enhancement.
