@@ -1,0 +1,12 @@
+# Ignore Jupyter notebooks and large data-like files in language stats
+notebooks/* linguist-vendored
+
+# Optionally ignore data or outputs
+*.csv linguist-vendored
+*.fits linguist-vendored
+*.pkl linguist-vendored
+*.hdf5 linguist-vendored
+*.npz linguist-vendored
+
+# Ensure Python source files are counted
+src/*.py linguist-detectable
