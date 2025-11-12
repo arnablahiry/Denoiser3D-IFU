@@ -31,11 +31,7 @@ PCA and ICA are implemented as unsupervised linear decomposition methods.
 Each spectral cube $Y(x, y, v)$ is reshaped into a two-dimensional matrix, with each row representing the spectrum of a spatial pixel.  
 
 **PCA:**  
-The cube is reconstructed using the dominant principal components that capture the majority of the signal variance. Reconstruction proceeds until the integrated flux within the emission aperture stabilizes:
-$$
-\text{Cumulative variance}(k) = \frac{\sum_{i=1}^{k} \lambda_i}{\sum_j \lambda_j}
-$$
-Only components preserving consistent flux are retained, effectively discarding noise-dominated subspaces.
+The cube is reconstructed using the dominant principal components that capture the majority of the signal variance. Reconstruction proceeds until the integrated flux within the emission aperture stabilizes. Only components preserving consistent flux are retained, effectively discarding noise-dominated subspaces.
 
 **ICA:**  
 ICA decomposes $Y' \approx AS$, where $A$ is the mixing matrix and $S$ the independent sources.  
@@ -50,6 +46,8 @@ $$
 \alpha = \Phi^{T} X,
 $$
 where $\Phi^{T}$ represents a 2D isotropic Starlet transform applied spatially and a 1D biorthogonal B-spline transform applied spectrally.
+
+![Wavelet Decomposition](figures/coeffs_reshaped.svg)
 
 The denoising minimizes:
 
