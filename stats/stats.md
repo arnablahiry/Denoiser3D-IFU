@@ -1,0 +1,1 @@
+### Stats (RMSE/Flux Conservation/SNR improvement) were generated for comparitive studies conducted on multi-parameter space exploration of toy cubes, different noise level realisations of W2246-like FIRE mock IFU cube and of W2246 itself. 
